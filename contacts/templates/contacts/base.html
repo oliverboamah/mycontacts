@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shouldo | {% block title %}{% endblock title %}</title>
+
+    {% block stylesheets %}
+        <link href="{% static 'tasks/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% endblock stylesheets %}
+</head>
+
+<body>
+
+{% block header %}
+    <div class="container">
+    <div class="card card-body bg-success" style="margin-top: 10px">
+        <div style="text-align: center">
+            <h2 style="color: white">Contacts App</h2>
+            <h3 style="color: white">Organizing your contacts just got Eazeh!</h3>
+        </div>
+    </div>
+    <div>
+    <br/><br/>
+{% endblock header %}
+
+<!-- Messages -->
+{% block messages %}
+    <div class="row">
+        <div class="col-md-12">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="text-center font-weight-bold alert alert-dismissible fade show
+                       {% if message.level_tag == 'error' %}
+                       alert-danger
+                       {% else %}
+                       alert-{{ message.tags }}
+                       {% endif %}">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock messages %}
+{% block content %}
+
+{% endblock content %}
+</div>
+</div>
+{% block scripts %}
+    <script src="{% static 'tasks/bootstrap/js/jquery.js' %}" type="text/javascript"></script>
+    <script src="{% static 'tasks/bootstrap/js/bootstrap.js' %}" type="text/javascript"></script>
+{% endblock scripts %}
+</body>
+</html>
