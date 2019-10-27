@@ -8,3 +8,5 @@ class Contact(models.Model):
     email = models.EmailField(null=True)
     created_at = models.DateTimeField(auto_now_add=timezone.now())
     updated_at = models.DateTimeField(auto_now=timezone.now())
+    is_deleted = models.BooleanField(default=False)
+
