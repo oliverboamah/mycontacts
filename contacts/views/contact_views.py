@@ -36,7 +36,7 @@ def delete_contact(request, id):
 
 
 # update contact
-def update_task(request, id):
+def update_contact(request, id):
     if request.method == 'POST':
         try:
             contact = Contact.objects.get(pk=id)
