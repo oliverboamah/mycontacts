@@ -19,7 +19,7 @@ def create_contact(request):
     except Exception as e:
         messages.error(request, e)
 
-    return redirect('contacts:index')
+    return redirect('contacts/')
 
 
 # delete task
@@ -32,7 +32,7 @@ def delete_contact(request, id):
     except Exception as e:
         messages.error(request, e)
 
-    return redirect('contacts:index')
+    return redirect('contacts/')
 
 
 # update contact
@@ -46,7 +46,7 @@ def update_task(request, id):
         except Exception as e:
             messages.error(request, e)
 
-        return redirect('contacts:index')
+        return redirect('contacts/')
 
 
 # retrieve all contacts
@@ -73,8 +73,8 @@ def get_contact(request, id):
     return render(request=request, template_name='contacts/contact-detail.html', context=context)
 
 
-# get task as json
-def get_task_json(request, id):
+# get contact as json
+def get_contact_json(request, id):
     contact = Contact.objects.get(pk=id)
     contact_dict = {
         'id': contact.id,
