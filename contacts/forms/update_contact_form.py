@@ -1,0 +1,32 @@
+from django import forms
+
+from contacts.models import Contact
+
+
+class UpdateContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['phone_number', 'name', 'email']
+        widgets = {
+            'Phone number': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter contact',
+                    'class': 'form-control form-control-line',
+                    'id': 'phone_number'
+                }
+            ),
+            'Name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter name',
+                    'class': 'form-control form-control-line',
+                    'id': 'name'
+                }
+            ),
+            'Email': forms.Textarea(
+                attrs={
+                    'placeholder': 'Enter email',
+                    'class': 'form-control form-control-line',
+                    'id': 'email'
+                }
+            ),
+        }
