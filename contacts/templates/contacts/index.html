@@ -10,9 +10,9 @@
     <table class="table table-striped table-bordered">
         <tr>
             <th>ID</th>
-            <th>Title</th>
-            <th>Due Date</th>
-            <th>Created at</th>
+            <th>Phone number</th>
+            <th>Name</th>
+            <th>Email</th>
             <th>Action</th>
         </tr>
         {% for contact in contacts %}
@@ -22,7 +22,7 @@
                 <td>{{ contact.name }}</td>
                 <td>{{ contact.email }}</td>
                 <td>
-                    <a href="{% url 'tasks:detail' task.id %}"><span class="badge badge-info"><i
+                    <a href="{% url 'contacts:show' contact.id %}"><span class="badge badge-info"><i
                             class="fa fa-eye"></i> View</span></a>
                     <a id="{{ contact.id }}" class="update-contact" href="javascript: void(0)"><span
                             class="badge badge-warning"
@@ -39,7 +39,7 @@
     <div id="exampleModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="/create" method="post" enctype="multipart/form-data">
+                <form action="{% url 'contacts:create' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="modal-header">
                         <h3>Add Contact</h3>

@@ -19,10 +19,10 @@ def create_contact(request):
     except Exception as e:
         messages.error(request, e)
 
-    return redirect('contacts/')
+    return redirect('contacts:index')
 
 
-# delete task
+# delete contact
 def delete_contact(request, id):
     try:
         contact = Contact.objects.get(pk=id)
@@ -32,7 +32,7 @@ def delete_contact(request, id):
     except Exception as e:
         messages.error(request, e)
 
-    return redirect('contacts/')
+    return redirect('contacts:delete')
 
 
 # update contact
@@ -46,7 +46,7 @@ def update_contact(request, id):
         except Exception as e:
             messages.error(request, e)
 
-        return redirect('contacts/')
+        return redirect('contacts:update')
 
 
 # retrieve all contacts
