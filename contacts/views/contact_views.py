@@ -23,30 +23,30 @@ def create_contact(request):
 
 
 # delete contact
-def delete_contact(request, id):
+def delete_contact(request, contact_id):
     try:
-        contact = Contact.objects.get(pk=id)
+        contact = Contact.objects.get(pk=contact_id)
         contact.is_deleted = True
         contact.save()
         messages.success(request, "Contact deleted successfully!")
     except Exception as e:
         messages.error(request, e)
 
-    return redirect('contacts:delete')
+    return redirect('contacts:index')
 
 
 # update contact
-def update_contact(request, id):
+def update_contact(request, contact_id):
     if request.method == 'POST':
         try:
-            contact = Contact.objects.get(pk=id)
+            contact = Contact.objects.get(pk=contact_id)
             form = UpdateContactForm(data=request.POST, instance=contact)
             form.save()
             messages.success(request, 'Contact has been updated successfully!')
         except Exception as e:
             messages.error(request, e)
 
-        return redirect('contacts:update')
+        return redirect('contacts:index')
 
 
 # retrieve all contacts
@@ -64,8 +64,8 @@ def get_all_contacts(request):
 
 
 # show single contact
-def get_contact(request, id):
-    contact = Contact.objects.filter(pk=id).first()
+def get_contact(request, contact_id):
+    contact = Contact.objects.filter(pk=contact_id).first()
 
     context = {
         'contact': contact
@@ -74,8 +74,8 @@ def get_contact(request, id):
 
 
 # get contact as json
-def get_contact_json(request, id):
-    contact = Contact.objects.get(pk=id)
+def get_contact_json(request, contact_id):
+    contact = Contact.objects.get(pk=contact_id)
     contact_dict = {
         'id': contact.id,
         'phone_number': contact.phone_number,

@@ -8,19 +8,19 @@ class CreateContactForm(forms.ModelForm):
         model = Contact
         fields = ['phone_number', 'name', 'email']
         widgets = {
-            'Phone number': forms.TextInput(
+            'phone_number': forms.TextInput(
                 attrs={
                     'placeholder': 'Enter contact',
                     'class': 'form-control form-control-line'
                 }
             ),
-            'Name': forms.TextInput(
+            'name': forms.TextInput(
                 attrs={
                     'placeholder': 'Enter name',
                     'class': 'form-control form-control-line'
                 }
             ),
-            'Email': forms.Textarea(
+            'email': forms.EmailInput(
                 attrs={
                     'placeholder': 'Enter email',
                     'class': 'form-control form-control-line'

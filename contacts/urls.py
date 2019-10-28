@@ -29,7 +29,7 @@ urlpatterns = [
         name='delete'
     ),
     url(
-        regex=r'^contacts-detail/(?P<contact_id>\d+)$',
+        regex=r'^show/(?P<contact_id>\d+)$',
         view=contact_views.get_contact,
         name='show'
     ),
