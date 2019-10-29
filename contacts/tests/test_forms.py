@@ -29,4 +29,5 @@ class ContactFormTestCase(TestCase):
         self.assertEqual(update_contact_form.is_valid(), True)
 
     def test_update_contact_form_rejects_valid_data(self):
-        pass
+        update_contact_form = UpdateContactForm(data=self.invalid_form_data)
+        self.assertEqual(update_contact_form.is_valid(), False)
