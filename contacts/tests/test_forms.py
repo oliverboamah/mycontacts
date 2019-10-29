@@ -20,7 +20,7 @@ class ContactFormTestCase(TestCase):
         create_contact_form = CreateContactForm(data=self.valid_form_data)
         self.assertEqual(create_contact_form.is_valid(), True)
 
-    def test_create_contact_form_rejects_valid_data(self):
+    def test_create_contact_form_rejects_invalid_data(self):
         create_contact_form = CreateContactForm(data=self.invalid_form_data)
         self.assertEqual(create_contact_form.is_valid(), False)
 
@@ -28,6 +28,6 @@ class ContactFormTestCase(TestCase):
         update_contact_form = UpdateContactForm(data=self.valid_form_data)
         self.assertEqual(update_contact_form.is_valid(), True)
 
-    def test_update_contact_form_rejects_valid_data(self):
+    def test_update_contact_form_rejects_invalid_data(self):
         update_contact_form = UpdateContactForm(data=self.invalid_form_data)
         self.assertEqual(update_contact_form.is_valid(), False)
