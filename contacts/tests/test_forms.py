@@ -15,7 +15,14 @@ class ContactFormTestCase(TestCase):
         self.assertEqual(create_contact_form.is_valid(), True)
 
     def test_create_contact_form_rejects_valid_data(self):
-        pass
+        invalid_form_data = {
+            'phone_number': '0234110022',
+            'name': 'Ronaldo',
+            'email': 'ronaldo'
+        }
+
+        create_contact_form = CreateContactForm(data=invalid_form_data)
+        self.assertEqual(create_contact_form.is_valid(), False)
 
     def test_update_contact_form_accepts_valid_data(self):
         pass
