@@ -72,3 +72,26 @@ class ContactViewsTestCase(TestCase):
 
         # assert that the contact was deleted
         self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 0)
+
+    def test_show_contact_detail(self):
+        # create new contact
+        self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 0)
+        contact = mommy.make(Contact)
+        contact_dict = model_to_dict(contact)
+
+        # assert that the contact was created
+        response = self.client.post(reverse('contacts:create'), contact_dict)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 1)
+
+        # retrieve created contact
+        contact = Contact.objects.filter(pk=1, is_deleted=False).first()
+
+        # go to contact detail page
+        response = self.client.get(reverse('contacts:show', kwargs={'contact_id': contact.id}))
+        self.assertEqual(response.status_code, 200)
+
+        # assert that the contact details is shown in the template
+        self.assertEqual(response.context['contact'].phone_number, contact.phone_number)
+        self.assertEqual(response.context['contact'].name, contact.name)
+        self.assertEqual(response.context['contact'].email, contact.email)
