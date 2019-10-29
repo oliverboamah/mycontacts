@@ -3,10 +3,9 @@ from django.utils import timezone
 
 
 class Contact(models.Model):
-    phone_number = models.CharField(max_length=15, null=False)
+    phone_number = models.CharField(max_length=15)
     name = models.CharField(max_length=100, null=True)
     email = models.EmailField(null=True)
     created_at = models.DateTimeField(auto_now_add=timezone.now())
     updated_at = models.DateTimeField(auto_now=timezone.now())
     is_deleted = models.BooleanField(default=False)
-

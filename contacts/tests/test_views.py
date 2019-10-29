@@ -2,7 +2,6 @@ from django.test import TestCase, Client
 from model_mommy import mommy
 from django.forms.models import model_to_dict
 from django.urls import reverse
-
 from contacts.models import Contact
 
 
@@ -95,3 +94,25 @@ class ContactViewsTestCase(TestCase):
         self.assertEqual(response.context['contact'].phone_number, contact.phone_number)
         self.assertEqual(response.context['contact'].name, contact.name)
         self.assertEqual(response.context['contact'].email, contact.email)
+
+    def test_all_contacts_view(self):
+        # create 10 new contacts
+        i = 0
+        while i < 10:
+            # create new contact
+            self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 0 + i)
+            contact = mommy.make(Contact)
+            contact_dict = model_to_dict(contact)
+
+            # assert that the contact was created
+            response = self.client.post(reverse('contacts:create'), contact_dict)
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 1 + i)
+
+            i += 1
+
+        # go to index template (it shows list of all contacts)
+        response = self.client.get(reverse('contacts:index'))
+
+        # assert that the template shows 10 contacts
+        self.assertEqual(len(response.context['contacts']), 10)
