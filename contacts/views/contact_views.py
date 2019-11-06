@@ -1,7 +1,8 @@
 # Django imports
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.core.cache import cache
 
 # My App imports
 from contacts.forms.create_contact_form import CreateContactForm
@@ -83,3 +84,13 @@ def get_contact_json(request, contact_id):
         'email': contact.email
     }
     return JsonResponse(data=contact_dict, safe=True)
+
+
+# test redis
+def test_redis(request):
+    # try:
+    #     cache.__setattr__('key', 'value')
+    # except Exception as e:
+    #     messages.error(request, e)
+
+    return HttpResponse('Key: ')

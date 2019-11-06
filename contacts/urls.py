@@ -38,4 +38,9 @@ urlpatterns = [
         view=contact_views.get_contact_json,
         name='get-contact-json'
     ),
+    url(
+        regex=r'^test_redis/$',
+        view=contact_views.test_redis,
+        name='index'
+    ),
 ]
