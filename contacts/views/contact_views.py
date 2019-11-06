@@ -88,9 +88,9 @@ def get_contact_json(request, contact_id):
 
 # test redis
 def test_redis(request):
-    # try:
-    #     cache.__setattr__('key', 'value')
-    # except Exception as e:
-    #     messages.error(request, e)
+    try:
+        cache.__setattr__('key', 'value')
+    except Exception as e:
+        messages.error(request, e)
 
-    return HttpResponse('Key: ')
+    return HttpResponse('Key: ' + cache.__getattr__('key'))
