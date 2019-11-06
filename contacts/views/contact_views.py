@@ -82,5 +82,4 @@ def get_contact_json(request, contact_id):
         'name': contact.name,
         'email': contact.email
     }
-
     return JsonResponse(data=contact_dict, safe=True)

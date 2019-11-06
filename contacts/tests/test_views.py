@@ -19,6 +19,15 @@ class ContactViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 1)
 
+        saved_contact = Contact.objects.filter(pk=contact.id, is_deleted=False).first()
+
+        self.assertEqual(contact.id, saved_contact.id)
+        self.assertEqual(contact.phone_number, saved_contact.phone_number)
+        self.assertEqual(contact.name, saved_contact.name)
+        self.assertEqual(contact.email, saved_contact.email)
+
+        self.assertEqual(response.url, '/')
+
     def test_update_contact(self):
         # create new contact
         self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 0)
@@ -51,6 +60,8 @@ class ContactViewsTestCase(TestCase):
         self.assertEqual(contact.name, 'Oliver')
         self.assertEqual(contact.phone_number, '0553290000')
 
+        self.assertEqual(response.url, '/')
+
     def test_delete_contact(self):
         # create new contact
         self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 0)
@@ -72,6 +83,8 @@ class ContactViewsTestCase(TestCase):
         # assert that the contact was deleted
         self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 0)
 
+        self.assertEqual(response.url, '/')
+
     def test_show_contact_detail(self):
         # create new contact
         self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 0)
@@ -82,9 +95,6 @@ class ContactViewsTestCase(TestCase):
         response = self.client.post(reverse('contacts:create'), contact_dict)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Contact.objects.filter(is_deleted=False).count(), 1)
-
-        # retrieve created contact
-        contact = Contact.objects.filter(pk=1, is_deleted=False).first()
 
         # go to contact detail page
         response = self.client.get(reverse('contacts:show', kwargs={'contact_id': contact.id}))
