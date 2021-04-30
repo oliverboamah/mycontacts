@@ -5,5 +5,5 @@ idna==2.8
 model-mommy==2.0.0
 pytz==2019.3
 requests==2.22.0
-urllib3==1.25.6
+urllib3==1.25.8
 django-redis==4.9.0
